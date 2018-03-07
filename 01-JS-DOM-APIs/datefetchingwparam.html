@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DataFetchEj4</title>
+
+    <link rel="stylesheet" href="css/normalize.css" type="text/css">
+    <script src="js/getResponse.js"></script>
+
+    <style>
+
+          .container{
+              max-width: 1500px;
+              min-width: 900px;
+              height: 900px;
+              background:#4267b2;
+              overflow-y: scroll;
+          }
+          @media (min-width: 40rem){
+
+          .column{
+          float:left;
+          padding-left:1px;
+          padding-right:1px;
+          }
+
+          .column.third { width: 40%; }
+          .column.flow-opposite { float: right; }
+          }
+          #respuesta{
+                font-size: 1rem;
+                font-family: sans-serif;
+          }
+
+          #lista{
+            font-family: helvetica;
+            font-size: 1rem;
+            background: #f9fafc;
+            overflow-x: scroll;
+            max-height: 900px;
+          }
+          button{
+            font-size: 2.5rem;
+            width: 400px;
+            height: 175px;
+            text-align: center;
+            margin-top: 25%;
+            margin-left: 15%;
+            border-radius: 20px;
+          }
+          h2{font-size: 2rem;}
+    </style>
+  </head>
+  <body>
+      <div class="container">
+            <button type="button" name="ask" onclick="getResponseOnList('https://api.github.com/search/repositories?q=JavaScript')">Get Repositories</button>
+            <div class="column third flow-opposite" id="respuesta">
+                    <h2>List of Repositories</h2>
+                        <ul id="lista">
+                        </ul>
+            </div>
+      </div>
+  </body>
+</html>

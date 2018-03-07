@@ -1,0 +1,46 @@
+body{
+  background-image: url("joker.jpg");
+  max-height: 1000px;
+}
+h1{
+  color: white !important;
+  margin-left: 40%;
+}
+td{
+  height: 50px;
+  border:3px solid black;
+  }
+.buttons_option{
+    border-right: 1px solid grey;
+}
+.td_options{
+  width: 215px;
+  padding: 0 0 0 0;
+}
+.td_options_text{
+  text-align: center;
+}
+.td_tabla{
+  padding: 2px 25px 2px 25px;
+  width: 450px;
+  text-align: center;
+  font-family: sans-serif;
+}
+.movie_row:hover{
+  opacity: 1.2;
+  background-color:white;
+}
+#movie_table{
+overflow-y: scroll;
+max-height: 60%;
+background-color: white;
+border: 3px solid black;
+}
+#body_table{
+  background-color:  #F9F9F9;
+}
+#movie_form{
+  margin-left: 20px;
+  margin-top: 20px;
+  color:white;
+}
