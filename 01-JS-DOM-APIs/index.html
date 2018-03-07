@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Show waths hide</title>
+    
+    <script src="js/getResponse.js"></script>
+    <style>
+       .section{
+          margin-top: 20px;
+          background-color: grey;
+          color:white;
+          width: 1000px;
+          height: 350px;
+          margin-left: 5%;
+       }
+
+       #respuesta{
+          font-family: sans-serif;
+          text-align: center;
+          width: 1000px;
+          height: 350px;
+       }
+    </style>
+  </head>
+  <body>
+      <div class="section">
+            <textarea type="textarea" id="respuesta" name="respuesta" value="Aqui se mostrara la respuesta"></textarea><br><br>
+            <button type="button" name="alert" onclick="getResponse('http://api.icndb.com/jokes/random')">Get Response</button><br><br>
+      </div>
+  </body>
+</html>

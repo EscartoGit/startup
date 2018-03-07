@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show waths hide</title>
+    <style>
+       .section{
+          text-align: center;
+          margin-top: 20px;
+          background-color: black;
+          color:white;
+          width: 450px;
+          height: 20px;
+          margin-left: 25%;
+       }
+       #oculto{
+            visibility: hidden;
+            opacity: 0.1;
+       }
+    </style>
+  </head>
+  <body onload="showText()">
+      <div class="section">
+          this is some random content.<br><br>
+          <button type="button" name="alert" onclick="showAlert()">No toque este boton</button><br><br>
+      </div><br><br>
+      <div class="section" id="oculto">
+          Hello World
+      </div>
+      <script type="text/javascript">
+          function showAlert(){
+            alert("BOOOM!!! La curiosidad mato al gato");
+          }
+          function showText(){
+                document.getElementById("oculto").style.visibility="visible";
+                document.getElementById("oculto").style.opacity=1;
+                document.getElementById('oculto').style.WebkitTransition = 'opacity 3s';
+                document.getElementById('oculto').style.MozTransition = 'opacity 3s';
+
+          }
+      </script>
+  </body>
+</html>

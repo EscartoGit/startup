@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Movies | Topic 2 Bootcamp</title>
+
+    <script src= "index_bundle.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  </head>
+  <body>
+    <h1>MOVIE SPACE</h1>
+    <form name="newMovie" id="movie_form" method="get">
+      Title:    <input type="text" name="title" placeholder="Title" required><br><br>
+      Year:     <input type="number" name="year" placeholder="Year" required><br><br>
+      Duration: <input type="number" name="hora" placeholder="hr" required>
+                <input type="number" name="min" placeholder="min" required><br><br>
+                <input type="button" value="Add Movie" onclick="addMovie()"/>
+                <button type="reset">Reset</button>
+    </form><br><br>
+    <div class="container">
+       <table id="movie_table" border="1px">
+            <thead>
+              <td class="td_tabla">Title</td>
+              <td class="td_tabla">Year</td>
+              <td class="td_tabla">Duration</td>
+              <td class="td_options td_options_text">Options</td>
+            </thead>
+            <tbody id="body_table">
+            </tbody>
+       </table>
+    </div>
+  </body>
+</html>
