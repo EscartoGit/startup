@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <title>Storage | Bootcamp 2018</title>
+    <style>
+        .to_save{
+          margin-left: 5px;
+          float: left;
+        }
+        .to_show{
+          margin-right: 5px;
+          float:right;
+        }
+        .search{
+          margin-top:2px;
+        }
+    </style>
+  </head>
+  <body>
+      <div class="to_save">
+          <b>Text to save: </b><br>
+          <textarea id="area_to_save" rows="8" cols="80"></textarea><br>
+          <input type="button" name="save" value="Save" onClick="saveContext()"></input>
+          <input type="button" name="clear" value="Clear" onClick="clearStorage()"></button>
+      </div>
+      <div class="to_show">
+          <b>Text saved: </b><br>
+          <textarea id="area_to_show" rows="8" cols="80"></textarea><br>
+          <input type="button" name="reveal" value="Reveal Local" onClick="showContextSavedLocal()"></input>
+          <input type="button" name="revealDB" value="Reveal IDB" onClick="findAll()"></input>
+          <input type="button" id="reset_visor" value="Clear" onClick="clearVisor()"></input>
+      </div>
+      <div class="search">
+          <input id="search_code" type="number" name="search" placeholder="Insert a code to search"></input><br>
+          <input type="button" name="button" value="Search" onClick="showContextSavedDB()"></input>
+      </div>
+      <script type="text/javascript">
+
+      // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
+      var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+      var code = 0;
+      // Open (or create) the database
+      function createDB(operation){
+
+          var open = indexedDB.open("LibraryTextArea", 1); //my database = "LibraryTextArea"
+          // Create the schema
+          open.onupgradeneeded = function() {
+            var db = open.result;
+            var store = db.createObjectStore("TAContent", {keyPath: "id"});
+            var index = store.createIndex("code", "textValue");
+          };
+          open.onsuccess = function() {
+              // Start a new transaction
+              var db = open.result;
+              var tx = db.transaction("TAContent", "readwrite");
+              var store = tx.objectStore("TAContent");
+              if (operation == "save"){
+                    //Adding data
+                    var request = store.put({id:code, text: document.getElementById("area_to_save").value});
+                    code++;
+                  }
+              else if (operation == "get") {
+                    document.getElementById("area_to_show").innerHTML = store.get(document.getElementById("search_code").text);
+              }
+              else if (operation == "showAll") {
+                    var request = store.getAll();
+                    request.onsuccess = function(event) {
+                        alert(request.result.id);
+                        var cursor = alert (event.target.result);
+                        if (cursor) {
+                            document.getElementById("area_to_show").innerHTML = "Id: " + cursor.id + " text: " + cursor.value +"\n";
+                            cursor.continue();
+                          }
+                        else {
+                          alert("No more entries!");
+                    };
+                  };
+              }
+          };
+        }
+
+        function CloseDB(){
+        tx.oncomplete = function() {
+          db.close(); // Close the db when the transaction is done
+        };
+      }
+
+        function findAll(){
+          createDB("showAll");
+        }
+
+        function showContextSavedDB(){
+          createDB("get");
+        }
+
+        function clearVisor(){
+            document.getElementById("area_to_show").innerHTML = "";
+        }
+
+          function saveContext(){
+              localStorage.setItem("textAreaContent",document.getElementById("area_to_save").value);
+              console.log("the content was saved with localStorage");
+              createDB("save",document.getElementById("area_to_save").value);
+              console.log(document.getElementById("area_to_save").value+" has been added using DB");
+              document.getElementById("area_to_save").value = "";
+        }
+
+          function showContextSavedLocal(){
+              let contextSaved = localStorage.getItem("textAreaContent");
+              document.getElementById("area_to_show").innerHTML = contextSaved;
+          }
+      </script>
+  </body>
+</html>
